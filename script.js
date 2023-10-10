@@ -6,7 +6,9 @@ const weatherIcon = document.getElementById('weather-icon')
 
 searchButton.addEventListener('click', () => {
   let inputValue = input.value
-  fetchWeatherData(inputValue)
+  if (inputValue) {
+    fetchWeatherData(inputValue)
+  }
 })
 
 
@@ -27,9 +29,11 @@ async function fetchWeatherData(inputValue) {
     temperature.innerText = data.current.temp_c + "°C";
     locationName.innerText = data.location.name
     weatherIcon.src = data.current.condition.icon
+    input.value = ''
   } catch (error) {
     console.error("Error fetching or parsing data:", error);
     temperature.innerText = 'Data Unavailable'
+    weatherIcon.src = 'Images/158398.png'
   }
 }
 
